@@ -1,0 +1,19 @@
+[
+  {
+    "name": "frontend",
+    "imageUri": "<IMAGE_URI>",
+    "portMappings": [
+      {
+        "containerPort": 80,
+        "protocol": "tcp"
+      }
+    ],
+    "essential": true,
+    "environment": [
+      {
+        "name": "BACKEND_URL",
+        "value": "http://backend-service:5000"
+      }
+    ]
+  }
+]

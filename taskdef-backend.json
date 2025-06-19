@@ -1,0 +1,19 @@
+[
+  {
+    "name": "backend",
+    "imageUri": "<IMAGE_URI>",
+    "portMappings": [
+      {
+        "containerPort": 5000,
+        "protocol": "tcp"
+      }
+    ],
+    "essential": true,
+    "environment": [
+      { "name": "DB_HOST", "value": "todo-db.cj6qsyeks067.ap-south-1.rds.amazonaws.com" },
+      { "name": "DB_USER", "value": "admin" },
+      { "name": "DB_PASS", "value": "A-Strong-Passw0rd!" },
+      { "name": "DB_NAME", "value": "db1" }
+    ]
+  }
+]
