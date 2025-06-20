@@ -1,19 +1,37 @@
-[
-  {
-    "name": "frontend",
-    "imageUri": "202583917032.dkr.ecr.ap-south-1.amazonaws.com/frontend:latest",
-    "portMappings": [
-      {
-        "containerPort": 80,
-        "protocol": "tcp"
-      }
-    ],
-    "essential": true,
-    "environment": [
-      {
-        "name": "BACKEND_URL",
-        "value": "http://backend.myapp.local:5000"
-      }
-    ]
-  }
-]
+{
+  "family": "frontend-task",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024",
+  "executionRoleArn": "arn:aws:iam::202583917032:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::202583917032:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "name": "frontend",
+      "image": "<IMAGE_URI>",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "hostPort": 80,
+          "protocol": "tcp"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/frontend-task",
+          "awslogs-region": "ap-south-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "environment": [
+        {
+          "name": "BACKEND_URL",
+          "value": "http://backend.myapp.local:5000"
+        }
+      ]
+    }
+  ]
+}
