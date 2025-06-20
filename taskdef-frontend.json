@@ -1,7 +1,7 @@
 [
   {
     "name": "frontend",
-    "imageUri": "<IMAGE_URI>",
+    "imageUri": "202583917032.dkr.ecr.ap-south-1.amazonaws.com/frontend:latest",
     "portMappings": [
       {
         "containerPort": 80,
