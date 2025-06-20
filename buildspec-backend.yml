@@ -15,7 +15,7 @@ phases:
       - echo Pushing image...
       - docker push 202583917032.dkr.ecr.ap-south-1.amazonaws.com/backend:latest
       - echo Writing task definition...
-      - sed -e "s|<IMAGE_URI>|202583917032.dkr.ecr.ap-south-1.amazonaws.com/backend:latest|g" taskdef-backend.json > imagedefinitions.json
+      - sed -e "s|<IMAGE_URI>|202583917032.dkr.ecr.ap-south-1.amazonaws.com/backend:latest|g" taskdef-backend.json > b-imagedefinitions.json
 artifacts:
   files:
-    - imagedefinitions.json
+    - b-imagedefinitions.json
