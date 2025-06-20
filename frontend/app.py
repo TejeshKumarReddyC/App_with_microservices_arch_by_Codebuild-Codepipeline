@@ -1,34 +1,34 @@
-from flask import Flask, render_template_string
-import requests
 import os
+import requests
+from flask import Flask, jsonify, render_template, request
 
 app = Flask(__name__)
 
-# Backend API URL (internal ECS service DNS or environment variable)
-BACKEND_URL = os.environ.get("BACKEND_URL", "http://localhost:5000")
+# ✅ Get backend API URL from environment variable
+BACKEND_URL = os.getenv("BACKEND_URL", "http://localhost:5000")
 
-@app.route("/")
+@app.route('/')
 def index():
     try:
-        response = requests.get(f"{BACKEND_URL}/")
+        # Call the backend to get user list
+        response = requests.get(f"{BACKEND_URL}/users")
         users = response.json()
+        return jsonify(users)
     except Exception as e:
-        return f"<h2>Error connecting to backend: {e}</h2>"
+        return jsonify({"error": f"Error connecting to backend: {str(e)}"}), 500
 
-    # Render user list in simple HTML
-    html = """
-    <h1>Users List</h1>
-    {% if users %}
-        <ul>
-        {% for user in users %}
-            <li>{{ user.id }} - {{ user.name }}</li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>No users found.</p>
-    {% endif %}
-    """
-    return render_template_string(html, users=users)
+@app.route('/add-user', methods=['POST'])
+def add_user():
+    try:
+        data = request.get_json()
+        response = requests.post(f"{BACKEND_URL}/users", json=data)
+        return jsonify(response.json()), response.status_code
+    except Exception as e:
+        return jsonify({"error": f"Error posting to backend: {str(e)}"}), 500
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=80)
+@app.route('/health')
+def health():
+    return jsonify({"message": "Frontend is running"}), 200
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=80)
