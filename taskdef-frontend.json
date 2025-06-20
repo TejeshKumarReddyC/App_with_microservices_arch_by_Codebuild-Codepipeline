@@ -12,7 +12,7 @@
     "environment": [
       {
         "name": "BACKEND_URL",
-        "value": "http://backend-service:5000"
+        "value": "http://backend.myapp.local:5000"
       }
     ]
   }

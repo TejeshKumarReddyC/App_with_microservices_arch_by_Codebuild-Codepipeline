@@ -4,8 +4,8 @@
   "requiresCompatibilities": ["FARGATE"],
   "cpu": "256",
   "memory": "512",
-  "executionRoleArn": "arn:aws:iam::<ACCOUNT_ID>:role/ecsTaskExecutionRole",
-  "taskRoleArn": "arn:aws:iam::<ACCOUNT_ID>:role/ecsTaskRoleWithSecretsAccess",
+  "executionRoleArn": "arn:aws:iam::202583917032:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::202583917032:role/ecsTaskExecutionRole",
   "containerDefinitions": [
     {
       "name": "backend",
@@ -19,8 +19,8 @@
       "essential": true,
       "environment": [
         {
-          "name": "DB_SECRET_ARN",
-          "value": "arn:aws:secretsmanager:ap-south-1:202583917032:secret:rds-backend-secret-xxxx"
+          "name": "DB_SECRET_NAME",
+          "value": "myapp_secret"
         },
         {
           "name": "AWS_REGION",
