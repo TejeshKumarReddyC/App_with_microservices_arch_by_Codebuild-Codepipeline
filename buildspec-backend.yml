@@ -4,18 +4,18 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin <ACCOUNT_ID>.dkr.ecr.ap-south-1.amazonaws.com
+      - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 202583917032.dkr.ecr.ap-south-1.amazonaws.com
   build:
     commands:
       - echo Build backend Docker image...
       - docker build -t backend ./backend
-      - docker tag backend:latest <ACCOUNT_ID>.dkr.ecr.ap-south-1.amazonaws.com/backend:latest
+      - docker tag backend:latest 202583917032.dkr.ecr.ap-south-1.amazonaws.com/backend:latest
   post_build:
     commands:
       - echo Pushing image...
-      - docker push <ACCOUNT_ID>.dkr.ecr.ap-south-1.amazonaws.com/backend:latest
+      - docker push 202583917032.dkr.ecr.ap-south-1.amazonaws.com/backend:latest
       - echo Writing task definition...
-      - sed -e "s|<IMAGE_URI>|<ACCOUNT_ID>.dkr.ecr.ap-south-1.amazonaws.com/frontend:latest|g" taskdef-backend.json > imagedefinitions.json
+      - sed -e "s|<IMAGE_URI>|202583917032.dkr.ecr.ap-south-1.amazonaws.com/frontend:latest|g" taskdef-backend.json > imagedefinitions.json
 artifacts:
   files:
     - imagedefinitions.json
