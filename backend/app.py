@@ -36,7 +36,7 @@ def get_connection():
 
 @app.route('/')
 def home():
-    return jsonify({"message": "Backend is running!"})
+    return jsonify({"message": "Backend is running smoothly!"})
 
 @app.route('/users', methods=['POST'])
 def add_user():
